@@ -1,0 +1,10 @@
+app:
+    name: Cégértékelő
+
+action:
+    close: Bezárás
+
+review:
+    index:
+        title: Vélemények
+        empty_list: Még nem érkezett vélemény, Te lehetsz az első!

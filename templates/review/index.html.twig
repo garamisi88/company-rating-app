@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Vélemények{% endblock %}
+{% block title %}{{ 'review.index.title'|trans }}{% endblock %}
 
 {% block body %}
-    <h1 class="h3 mb-4">Vélemények</h1>
+    <h1 class="h3 mb-4">{{ 'review.index.title'|trans }}</h1>
 
-    <p class="text-body-secondary">Még nem érkezett vélemény, Te lehetsz az első.</p>
+    <p class="text-body-secondary">{{ 'review.index.empty_list'|trans }}</p>
 {% endblock %}

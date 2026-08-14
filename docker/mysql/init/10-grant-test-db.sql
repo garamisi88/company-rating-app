@@ -1,0 +1,2 @@
+GRANT ALL PRIVILEGES ON `app\_%`.* TO 'app'@'%';
+FLUSH PRIVILEGES;

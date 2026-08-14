@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\Entity;
 
 use App\Entity\Trait\TimestampableTrait;
@@ -27,7 +29,7 @@ class Review
 
     #[ORM\Column(type: Types::SMALLINT)]
     #[Assert\NotBlank]
-    #[Assert\Range(min:1, max:5)]
+    #[Assert\Range(min: 1, max: 5)]
     private ?int $rating = null;
 
     #[ORM\Column(type: Types::TEXT)]

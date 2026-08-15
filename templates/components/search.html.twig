@@ -1,0 +1,12 @@
+{% set sort = sort|default('') %}
+<form method="get" role="search" class="mb-4">
+    {% if sort is not empty %}
+        <input type="hidden" name="sort" value="{{ sort }}" />
+    {% endif %}
+    <div class="input-group">
+        <input type="search" name="q" value="{{ query }}" class="form-control"
+               placeholder="{{ 'search.placeholder'|trans }}"
+               aria-label="{{ 'search.label'|trans }}" />
+        <button class="btn btn-primary" type="submit">{{ 'search.submit'|trans }}</button>
+    </div>
+</form>

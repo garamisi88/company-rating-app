@@ -3,6 +3,8 @@
 {% block title %}{{ 'review.index.title'|trans }}{% endblock %}
 
 {% block body %}
+    {% set filters = query is not empty ? { q: query } : {} %}
+
     <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-5">
         <h1 class="h3 mb-4">{{ 'review.index.title'|trans }}</h1>
         <div class="dropdown">
@@ -14,7 +16,7 @@
                 {% for option in sortOptions %}
                     <li>
                         <a class="dropdown-item{{ option.value == sort.value ? ' active' }}"
-                           href="{{ path('app_review_index', { sort: option.value }) }}">
+                           href="{{ path('app_review_index', filters|merge({ sort: option.value })) }}">
                             {{ option.translationKey|trans }}
                         </a>
                     </li>
@@ -23,8 +25,17 @@
         </div>
     </div>
 
+    {{ include('components/search.html.twig', {
+        query: query,
+        sort: sort.value,
+    }) }}
+
     {% if reviews is empty %}
-        <p class="text-body-secondary">{{ 'review.index.empty_list'|trans }}</p>
+        <p class="text-body-secondary">
+            {{ query is empty
+                ? 'review.index.empty_list'|trans
+                : 'review.index.no_result'|trans({ '%query%': query  }) }}
+        </p>
     {% else %}
         <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
         {% for review in reviews %}
@@ -39,7 +50,7 @@
             currentPage: currentPage,
             pageCount: pageCount,
             routeName: 'app_review_index',
-            routeParams: { sort: sort.value },
+            routeParams: filters|merge({ sort: sort.value }),
         }) }}
     {% endif %}
 {% endblock %}

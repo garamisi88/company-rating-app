@@ -22,14 +22,23 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
-    public function paginate(ReviewSort $reviewSort, int $page, int $pageSize): Paginator
-    {
-        $query = $this->createQueryBuilder('r')
+    public function paginate(
+        ReviewSort $reviewSort,
+        int $page,
+        int $pageSize,
+        ?string $companyName,
+    ): Paginator {
+        $builder = $this->createQueryBuilder('r')
             ->orderBy('r.'.$reviewSort->field(), $reviewSort->direction())
             ->addOrderBy('r.id', 'DESC')
             ->setFirstResult(($page - 1) * $pageSize)
-            ->setMaxResults($pageSize)
-            ->getQuery();
+            ->setMaxResults($pageSize);
+
+        if (null !== $companyName) {
+            $this->applyCompanyNameFilter($builder, $companyName);
+        }
+
+        $query = $builder->getQuery();
 
         return new Paginator($query, false);
     }

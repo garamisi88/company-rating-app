@@ -6,14 +6,9 @@
     <h1 class="h3 mb-4">{{ 'company.index.title'|trans }}</h1>
 
     {% if companies is not empty or query is not empty %}
-    <form method="get" role="search" class="mb-4">
-        <div class="input-group">
-            <input type="search" name="q" value="{{ query }}" class="form-control"
-                   placeholder="{{ 'company.search.placeholder'|trans }}"
-                   aria-label="{{ 'company.search.label'|trans }}">
-            <button class="btn btn-primary" type="submit">{{ 'company.search.submit'|trans }}</button>
-        </div>
-    </form>
+        {{ include('components/search.html.twig', {
+            query: query,
+        }) }}
     {% endif %}
 
     {% if companies is empty %}

@@ -12,6 +12,7 @@ review:
     index:
         title: Vélemények
         empty_list: Még nem érkezett vélemény, Te lehetsz az első!
+        no_result: 'Nincs vélemény erre a keresésre: „%query%”.'
     new:
         title: Új vélemény írása
         submit: Vélemény beküldése
@@ -38,12 +39,13 @@ company:
         title: Cégek értékelése
         empty_list: Még egy céget sem értékeltek, Te lehetsz az első!
         no_result: Nincs a keresésnek megfelelő cég.
-    search:
-        label: Keresés cégnév alapján
-        placeholder: Cég neve...
-        submit: Keresés
     review_count: '%count% vélemény'
     distribution_area: '%rating% csillagos értékelések aránya'
+
+search:
+    label: Keresés cégnév alapján
+    placeholder: Cég neve...
+    submit: Keresés
 
 pagination:
     label: Oldalak

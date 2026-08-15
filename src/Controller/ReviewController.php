@@ -26,8 +26,14 @@ final class ReviewController extends AbstractController
     {
         $sort = ReviewSort::fromString($request->query->get('sort', ''));
         $page = max(1, (int) $request->query->get('page', 1));
+        $query = trim($request->query->get('q', ''));
 
-        $paginator = $reviewRepository->paginate($sort, $page, $this->reviewsPageSize);
+        $paginator = $reviewRepository->paginate(
+            $sort,
+            $page,
+            $this->reviewsPageSize,
+            '' !== $query ? $query : null
+        );
         $pageCount = max(1, (int) ceil(\count($paginator) / $this->reviewsPageSize));
 
         return $this->render('review/index.html.twig', [
@@ -36,6 +42,7 @@ final class ReviewController extends AbstractController
             'sortOptions' => ReviewSort::cases(),
             'currentPage' => $page,
             'pageCount' => $pageCount,
+            'query' => $query,
         ]);
     }
 

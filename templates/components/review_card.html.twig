@@ -1,0 +1,17 @@
+<div class="col">
+    <article class="card h-100">
+        <div class="card-body">
+            <div class="d-flex align-items-center gap-2 mb-3">
+                {{ include('components/stars.html.twig', {
+                    rating: review.rating
+                }) }}
+                <time class="text-body-secondary small"
+                      datetime="{{ review.createdAt|date('c') }}">
+                    {{ review.createdAt|format_date('medium') }}
+                </time>
+            </div>
+            <h2 class="fs-6 fw-semibold mb-1">{{ review.companyName }}</h2>
+            <p class="card-text mb-0">{{ review.reviewText|u.truncate(160, '…', false) }}</p>
+        </div>
+    </article>
+</div>

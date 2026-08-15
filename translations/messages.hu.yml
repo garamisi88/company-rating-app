@@ -8,3 +8,4 @@ review:
     index:
         title: Vélemények
         empty_list: Még nem érkezett vélemény, Te lehetsz az első!
+    rating_aria: "%rating% csillag az ötből"

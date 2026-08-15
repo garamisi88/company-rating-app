@@ -1,7 +1,6 @@
 services:
   db:
     image: mysql:8.4
-    container_name: company-rating-db
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: app

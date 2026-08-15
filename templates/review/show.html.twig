@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ review.companyName }} - {{ 'review.show.title'|trans }}{% endblock %}
+
+{% block body %}
+    <p class="mb-3">
+        <a href="{{ path('app_review_index') }}" class="text-decoration-none">
+            « {{ 'review.show.back'|trans }}
+        </a>
+    </p>
+
+    {{ include('components/review_card.html.twig', {
+        review: review,
+        variant: 'detail',
+    }) }}
+{% endblock %}

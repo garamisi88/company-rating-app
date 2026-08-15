@@ -6,8 +6,11 @@
     --control-radius: 0.5rem;
 
     --bs-body-color: #141414;
+    --bs-body-color-rgb: 20, 20, 20
     --bs-secondary-color: #767676;
     --bs-heading-color: var(--bs-body-color);
+    --bs-link-color-rgb: var(--bs-body-color-rgb);
+    --bs-link-hover-color-rgb: var(--brand-color-rgb);
 
     --star-size: 1.15rem;
     --star-color-filled: #f5a623;
@@ -17,6 +20,10 @@
     --transition-base: 0.18s ease;
     --card-lift: -3px;
     --card-shadow-hover: 0 0.5rem 1.25rem rgb(0 0 0 / 6%);
+}
+
+a {
+    transition: color var(--transition-base);
 }
 
 .stars {
@@ -52,8 +59,8 @@
         box-shadow var(--transition-base);
 }
 
-.card:hover,
-.card:focus-within {
+.card:has(.stretched-link):hover,
+.card:has(.stretched-link):focus-within {
     border-color: var(--brand-color);
     box-shadow: var(--card-shadow-hover);
     transform: translateY(var(--card-lift));
@@ -110,16 +117,14 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-    .card {
+    a,
+    .card,
+    .pagination .page-item .page-link{
         transition: none;
     }
 
-    .pagination .page-item .page-link {
-        transition: none;
-    }
-
-    .card:hover,
-    .card:focus-within {
+    .card:has(.stretched-link):hover,
+    .card:has(.stretched-link):focus-within {
         transform: none;
     }
 }

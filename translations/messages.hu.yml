@@ -8,6 +8,9 @@ review:
     index:
         title: Vélemények
         empty_list: Még nem érkezett vélemény, Te lehetsz az első!
+    show:
+        title: Vélemény
+        back: Vissza a véleményekhez
     rating_aria: "%rating% csillag az ötből"
     sort:
         newest: Legfrissebb elöl

@@ -1,17 +1,33 @@
-<div class="col">
-    <article class="card h-100">
-        <div class="card-body">
-            <div class="d-flex align-items-center gap-2 mb-3">
-                {{ include('components/stars.html.twig', {
-                    rating: review.rating
-                }) }}
-                <time class="text-body-secondary small"
-                      datetime="{{ review.createdAt|date('c') }}">
-                    {{ review.createdAt|format_date('medium') }}
-                </time>
-            </div>
-            <h2 class="fs-6 fw-semibold mb-1">{{ review.companyName }}</h2>
-            <p class="card-text mb-0">{{ review.reviewText|u.truncate(160, '…', false) }}</p>
+{% set isDetail = variant|default('summary') == 'detail' %}
+
+<article class="card {{ isDetail ? '' : 'h-100' }}">
+    <div class="card-body">
+        <div class="d-flex align-items-center gap-2 mb-3{{ isDetail ? ' flex-wrap' : '' }}">
+            {{ include('components/stars.html.twig', {
+                rating: review.rating
+            }) }}
+            <time class="text-body-secondary small"
+                  datetime="{{ review.createdAt|date('c') }}">
+                {{ isDetail
+                    ? review.createdAt|format_datetime('long', 'short')
+                    : review.createdAt|format_date('medium')
+                }}
+            </time>
         </div>
-    </article>
-</div>
+        {% if isDetail %}
+            <h1 class="h4 mb-1">{{ review.companyName }}</h1>
+        {% else %}
+            <h2 class="fs-6 fw-semibold mb-1">
+                <a href="{{ path('app_review_show', { id: review.id }) }}" class="stretched-link text-decoration-none link-body-emphasis">
+                    {{ review.companyName }}
+                </a>
+            </h2>
+        {% endif %}
+
+        {% if isDetail %}
+            <p class="review-body mb-0">{{ review.reviewText }}</p>
+        {% else %}
+            <p class="card-text mb-0">{{ review.reviewText|u.truncate(160, '…', false) }}</p>
+        {% endif %}
+    </div>
+</article>

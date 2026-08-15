@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Entity\Review;
 use App\Enum\ReviewSort;
 use App\Repository\ReviewRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,6 +34,14 @@ final class ReviewController extends AbstractController
             'sortOptions' => ReviewSort::cases(),
             'currentPage' => $page,
             'pageCount' => $pageCount,
+        ]);
+    }
+
+    #[Route('/review/{id}', name: 'app_review_show', requirements: ['id' => '\d+'], methods: ['GET'])]
+    public function show(Review $review): Response
+    {
+        return $this->render('review/show.html.twig', [
+            'review' => $review,
         ]);
     }
 }

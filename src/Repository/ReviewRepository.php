@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Repository;
 
 use App\Entity\Review;
+use App\Enum\ReviewSort;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -18,16 +20,15 @@ class ReviewRepository extends ServiceEntityRepository
         parent::__construct($registry, Review::class);
     }
 
-    /**
-     * @return list<Review>
-     */
-    public function findLatest(int $limit = 12): array
+    public function paginate(ReviewSort $reviewSort, int $page, int $pageSize): Paginator
     {
-        return $this->createQueryBuilder('r')
-            ->orderBy('r.createdAt', 'DESC')
+        $query = $this->createQueryBuilder('r')
+            ->orderBy('r.'.$reviewSort->field(), $reviewSort->direction())
             ->addOrderBy('r.id', 'DESC')
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult();
+            ->setFirstResult(($page - 1) * $pageSize)
+            ->setMaxResults($pageSize)
+            ->getQuery();
+
+        return new Paginator($query, false);
     }
 }

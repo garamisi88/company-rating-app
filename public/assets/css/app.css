@@ -1,6 +1,9 @@
 :root {
     --brand-color: #1A976A;
+    --brand-color-rgb: 26, 151, 106;
+
     --surface-border-color: #e9ecef;
+    --control-radius: 0.5rem;
 
     --bs-body-color: #141414;
     --bs-secondary-color: #767676;
@@ -56,8 +59,62 @@
     transform: translateY(var(--card-lift));
 }
 
+.btn-outline-secondary {
+    --bs-btn-border-color: var(--bs-body-color);
+    --bs-btn-color: var(--bs-body-color);
+    --bs-btn-bg: #fff;
+    --bs-btn-hover-color: #fff;
+    --bs-btn-hover-bg: var(--brand-color);
+    --bs-btn-hover-border-color: var(--brand-color);
+    --bs-btn-active-color: var(--brand-color);
+    --bs-btn-active-bg: #fff;
+    --bs-btn-active-border-color: var(--brand-color);
+    --bs-btn-border-radius: var(--control-radius);
+    --bs-btn-focus-shadow-rgb: var(--brand-color-rgb);
+}
+
+.dropdown-menu {
+    --bs-dropdown-border-color: var(--surface-border-color);
+    --bs-dropdown-border-radius: var(--control-radius);
+    --bs-dropdown-link-active-bg: var(--brand-color);
+
+    box-shadow: 0 0.5rem 1.25rem rgba(0, 0, 0, 8%);
+}
+
+.pagination {
+    --bs-pagination-color: #495057;
+    --bs-pagination-bg: #fff;
+    --bs-pagination-border-color: var(--surface-border-color);
+    --bs-pagination-border-radius: var(--control-radius);
+    --bs-pagination-hover-color: var(--brand-color);
+    --bs-pagination-hover-bg: #fff;
+    --bs-pagination-hover-border-color: var(--brand-color);
+    --bs-pagination-focus-color: var(--brand-color);
+    --bs-pagination-focus-bg: #fff;
+    --bs-pagination-focus-box-shadow: 0 0 0 0.25rem rgba(var(--brand-color-rgb), 20%);
+    --bs-pagination-active-color: #fff;
+    --bs-pagination-active-bg: var(--brand-color);
+    --bs-pagination-active-border-color: var(--brand-color);
+    --bs-pagination-disabled-color: #adb5bd;
+    --bs-pagination-disabled-bg: #fff;
+    --bs-pagination-disabled-border-color: var(--surface-border-color);
+
+    gap: 0.25rem;
+}
+
+.pagination .page-item .page-link {
+    border-radius: var(--bs-pagination-border-radius);
+    transition:
+        color var(--transition-base),
+        border-color var(--transition-base);
+}
+
 @media (prefers-reduced-motion: reduce) {
     .card {
+        transition: none;
+    }
+
+    .pagination .page-item .page-link {
         transition: none;
     }
 
@@ -66,3 +123,4 @@
         transform: none;
     }
 }
+

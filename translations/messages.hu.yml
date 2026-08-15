@@ -9,3 +9,13 @@ review:
         title: Vélemények
         empty_list: Még nem érkezett vélemény, Te lehetsz az első!
     rating_aria: "%rating% csillag az ötből"
+    sort:
+        newest: Legfrissebb elöl
+        oldest: Legrégebbi elöl
+        highest: Legjobb elöl
+        lowest: Legrosszabb elöl
+
+pagination:
+    label: Oldalak
+    previous: Előző
+    next: Következő

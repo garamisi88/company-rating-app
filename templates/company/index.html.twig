@@ -26,7 +26,7 @@
                         </div>
                         <div class="text-end">
                             {{ include('components/stars.html.twig', { rating: company.averageRating|round(2) }) }}
-                            <div class="fs-5 fw-semibold">
+                            <div class="average fs-5 fw-semibold">
                                 {{ company.averageRating|number_format(1, ',', ' ') }}
                             </div>
                         </div>

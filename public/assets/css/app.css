@@ -177,6 +177,20 @@ a {
     outline-offset: 2px;
 }
 
+.progress {
+    --bs-progress-height: 0.5rem;
+    --bs-progress-bg: var(--surface-border-color);
+    --bs-progress-bar-bg: var(--star-color-filled);
+}
+
+.distribution-row {
+    display: grid;
+    grid-template-columns: 1.5rem 1fr 2rem;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+}
+
 @media (prefers-reduced-motion: reduce) {
     a,
     .card,

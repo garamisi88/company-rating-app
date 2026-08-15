@@ -3,6 +3,7 @@ app:
 
 nav:
     new_review: Vélemény írás
+    companies: Cégek
 
 action:
     close: Bezárás
@@ -31,6 +32,18 @@ review:
         oldest: Legrégebbi elöl
         highest: Legjobb elöl
         lowest: Legrosszabb elöl
+
+company:
+    index:
+        title: Cégek értékelése
+        empty_list: Még egy céget sem értékeltek, Te lehetsz az első!
+        no_result: Nincs a keresésnek megfelelő cég.
+    search:
+        label: Keresés cégnév alapján
+        placeholder: Cég neve...
+        submit: Keresés
+    review_count: '%count% vélemény'
+    distribution_area: '%rating% csillagos értékelések aránya'
 
 pagination:
     label: Oldalak

@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'company.index.title'|trans }}{% endblock %}
+
+{% block body %}
+    <h1 class="h3 mb-4">{{ 'company.index.title'|trans }}</h1>
+
+    {% if companies is not empty or query is not empty %}
+    <form method="get" role="search" class="mb-4">
+        <div class="input-group">
+            <input type="search" name="q" value="{{ query }}" class="form-control"
+                   placeholder="{{ 'company.search.placeholder'|trans }}"
+                   aria-label="{{ 'company.search.label'|trans }}">
+            <button class="btn btn-primary" type="submit">{{ 'company.search.submit'|trans }}</button>
+        </div>
+    </form>
+    {% endif %}
+
+    {% if companies is empty %}
+        <p class="text-body-secondary">{{ (query is not empty ? 'company.index.no_result' : 'company.index.empty_list')|trans }}</p>
+    {% else %}
+        {% for company in companies %}
+            <article class="card mb-3">
+                <div class="card-body">
+                    <div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+                        <div>
+                            <h2 class="h5 mb-1">{{ company.companyName }}</h2>
+                            <span class="text-body-secondary small">
+                                    {{ 'company.review_count'|trans({ '%count%': company.reviewCount }) }}
+                                </span>
+                        </div>
+                        <div class="text-end">
+                            {{ include('components/stars.html.twig', { rating: company.averageRating|round(2) }) }}
+                            <div class="fs-5 fw-semibold">
+                                {{ company.averageRating|number_format(1, ',', ' ') }}
+                            </div>
+                        </div>
+                    </div>
+
+                    {% for rating in 5..1 %}
+                        {% set percentage = company.percentageFor(rating) %}
+                        <div class="distribution-row">
+                            <span class="text-body-secondary small">{{ rating }}</span>
+                            <div class="progress" role="progressbar"
+                                 aria-label="{{ 'company.distribution_aria'|trans({ '%rating%': rating }) }}"
+                                 aria-valuenow="{{ percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                <div class="progress-bar" style="width: {{ percentage }}%"></div>
+                            </div>
+                            <span class="text-body-secondary small text-end">{{ company.countFor(rating) }}</span>
+                        </div>
+                    {% endfor %}
+                </div>
+            </article>
+        {% endfor %}
+    {% endif %}
+{% endblock %}

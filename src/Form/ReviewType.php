@@ -13,6 +13,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Blank;
+use Symfony\Component\Validator\Constraints\Email;
 
 final class ReviewType extends AbstractType
 {
@@ -40,6 +41,7 @@ final class ReviewType extends AbstractType
             ])
             ->add('authorEmail', EmailType::class, [
                 'label' => 'review.form.author_email',
+                'constraints' => [new Email()],
             ])
             ->add('website', TextType::class, [
                 'label' => 'review.form.website',

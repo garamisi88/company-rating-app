@@ -1,0 +1,55 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ 'review.new.title'|trans }}{% endblock %}
+
+{% block _review_rating_row %}
+    <fieldset class="mb-4">
+        <legend class="form-label fs-6">{{ form.vars.label|trans }}</legend>
+        {{ form_widget(form) }}
+        {{ form_errors(form) }}
+    </fieldset>
+{% endblock %}
+
+{% block _review_rating_widget %}
+    <div class="rating-input">
+        {% for choice in form|reverse %}
+            <input type="radio"
+                   id="{{ choice.vars.id }}"
+                   name="{{ choice.vars.full_name }}"
+                   value="{{ choice.vars.value }}"
+                {{ choice.vars.checked ? 'checked' }}>
+            <label for="{{ choice.vars.id }}" class="rating-input__star">
+                <span class="visually-hidden">{{ choice.vars.label }}</span>
+            </label>
+        {% endfor %}
+    </div>
+{% endblock %}
+
+{% block body %}
+    {% form_theme form _self %}
+    
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <h1 class="h3 mb-4">{{ 'review.new.title'|trans }}</h1>
+
+            <div class="card">
+                <div class="card-body p-4">
+                    {{ form_start(form, { attr: { novalidate: 'novalidate' } }) }}
+                    {{ form_row(form.companyName) }}
+                    {{ form_row(form.rating) }}
+                    {{ form_row(form.reviewText) }}
+                    {{ form_row(form.authorEmail) }}
+                    {{ form_row(form.website) }}
+
+                    <div class="text-center mt-4">
+                        <button type="submit" class="btn btn-primary">
+                            {{ 'review.new.submit'|trans }}
+                        </button>
+                    </div>
+                    {{ form_end(form) }}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

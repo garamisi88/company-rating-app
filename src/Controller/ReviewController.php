@@ -6,7 +6,9 @@ namespace App\Controller;
 
 use App\Entity\Review;
 use App\Enum\ReviewSort;
+use App\Form\ReviewType;
 use App\Repository\ReviewRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,7 +17,7 @@ use Symfony\Component\Routing\Attribute\Route;
 final class ReviewController extends AbstractController
 {
     public function __construct(
-        private readonly int $reviewsPageSize
+        private readonly int $reviewsPageSize,
     ) {
     }
 
@@ -42,6 +44,27 @@ final class ReviewController extends AbstractController
     {
         return $this->render('review/show.html.twig', [
             'review' => $review,
+        ]);
+    }
+
+    #[Route('/review/new', name: 'app_review_new', methods: ['GET', 'POST'])]
+    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    {
+        $review = new Review();
+        $form = $this->createForm(ReviewType::class, $review);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->persist($review);
+            $entityManager->flush();
+
+            $this->addFlash('success', 'review.flash.created');
+
+            return $this->redirectToRoute('app_review_show', ['id' => $review->getId()]);
+        }
+
+        return $this->render('review/new.html.twig', [
+            'form' => $form,
         ]);
     }
 }

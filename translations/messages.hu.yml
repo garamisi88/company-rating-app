@@ -1,6 +1,9 @@
 app:
     name: Cégértékelő
 
+nav:
+    new_review: Vélemény írás
+
 action:
     close: Bezárás
 
@@ -8,6 +11,17 @@ review:
     index:
         title: Vélemények
         empty_list: Még nem érkezett vélemény, Te lehetsz az első!
+    new:
+        title: Új vélemény írása
+        submit: Vélemény beküldése
+    form:
+        company_name: Cég neve
+        rating: Értékelés
+        review_text: Vélemény
+        author_email: E-mail cím
+        website: Weboldal
+    flash:
+        created: Köszönjük a véleményed!
     show:
         title: Vélemény
         back: Vissza a véleményekhez

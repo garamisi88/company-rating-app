@@ -1,12 +1,13 @@
 :root {
     --brand-color: #1A976A;
     --brand-color-rgb: 26, 151, 106;
+    --brand-active-color: #48ac88;
 
     --surface-border-color: #e9ecef;
     --control-radius: 0.5rem;
 
     --bs-body-color: #141414;
-    --bs-body-color-rgb: 20, 20, 20
+    --bs-body-color-rgb: 20, 20, 20;
     --bs-secondary-color: #767676;
     --bs-heading-color: var(--bs-body-color);
     --bs-link-color-rgb: var(--bs-body-color-rgb);
@@ -114,6 +115,66 @@ a {
     transition:
         color var(--transition-base),
         border-color var(--transition-base);
+}
+
+.btn-primary {
+    --bs-btn-bg: var(--brand-color);
+    --bs-btn-border-color: var(--brand-color);
+    --bs-btn-hover-bg: #000;
+    --bs-btn-hover-border-color: #000;
+    --bs-btn-active-bg: var(--brand-active-color);
+    --bs-btn-active-border-color: var(--brand-active-color);
+    --bs-btn-focus-shadow-rgb: var(--brand-color-rgb);
+}
+
+.form-control:focus {
+    border-color: var(--brand-color);
+    box-shadow: 0 0 0 0.25rem rgba(var(--brand-color-rgb), 20%);
+}
+
+.honeypot {
+    position: absolute;
+    left: -9999px;
+}
+
+.rating-input {
+    display: inline-flex;
+    flex-direction: row-reverse;
+    justify-content: flex-end;
+    gap: 0.25rem;
+}
+
+.rating-input input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.rating-input__star {
+    width: 2rem;
+    height: 2rem;
+    cursor: pointer;
+    background-color: var(--star-color-empty);
+    transition: background-color var(--transition-base);
+
+    -webkit-mask-image: var(--star-glyph);
+    mask-image: var(--star-glyph);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+}
+
+.rating-input input:checked ~ .rating-input__star,
+.rating-input__star:hover,
+.rating-input__star:hover ~ .rating-input__star {
+    background-color: var(--star-color-filled);
+}
+
+.rating-input input:focus-visible + .rating-input__star {
+    outline: 2px solid var(--brand-color);
+    outline-offset: 2px;
 }
 
 @media (prefers-reduced-motion: reduce) {

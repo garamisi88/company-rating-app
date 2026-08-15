@@ -65,24 +65,30 @@
         ],
         "post-update-cmd": [
             "@auto-scripts"
-        ]
+        ],
+        "test": "@php bin/phpunit"
     },
     "scripts-descriptions": {
         "cs": "Check coding standards without modifying files",
-        "cs:fix": "Apply coding standard fixes"
+        "cs:fix": "Apply coding standard fixes",
+        "test": "Run the PHPUnit test suite"
     },
     "conflict": {
         "symfony/symfony": "*"
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false,
+            "allow-contrib": true,
             "require": "7.4.*"
         }
     },
     "require-dev": {
+        "dama/doctrine-test-bundle": "^8.6",
         "doctrine/doctrine-fixtures-bundle": "^4.3",
         "friendsofphp/php-cs-fixer": "^3.95",
+        "phpunit/phpunit": "^11.5",
+        "symfony/browser-kit": "7.4.*",
+        "symfony/css-selector": "7.4.*",
         "symfony/debug-bundle": "7.4.*",
         "symfony/maker-bundle": "^1.67",
         "symfony/stopwatch": "7.4.*",
